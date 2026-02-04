@@ -10,7 +10,7 @@ exports.authFoodPartnerMiddleware=async(req,res,next)=>{
     }
     try {
         const decode=jwt.verify(token,process.env.JWT_SECRET);
-        const foodPartner=await foodPartnerModel.findById(decode._id);
+        const foodPartner=await foodPartnerModel.findById(decode.id);
         req.foodPartner=foodPartner;
         next()
         
