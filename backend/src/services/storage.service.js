@@ -1,5 +1,4 @@
 const ImageKit=require('imagekit')
-const IMAGEKIT=require('@imagekit/n')
 
 const imageKit=new ImageKit({
     privateKey:process.env.IMAGEKIT_PRIVATEKEY,
