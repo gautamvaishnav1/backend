@@ -1,8 +1,21 @@
 import React from 'react'
+import api from '../API/api'
 
 const UserRegister = () => {
   const handleSubmit = (e) => {
-    e.preventDefault()  }
+    e.preventDefault() 
+    const formData = {
+      fullName: e.target.fullName.value,
+      email: e.target.email.value,
+      password: e.target.password.value }
+      api.post('/auth/register', formData)
+      .then(res => {
+        console.log('Registration successful:', res.data)
+      })
+      .catch(err => {
+        console.error('Registration failed:', err)
+      })  
+  }
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       <div className="w-full max-w-md bg-white rounded-lg shadow-sm">
