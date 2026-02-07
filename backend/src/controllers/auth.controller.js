@@ -2,9 +2,17 @@ const userModel = require("../models/user.model");
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken');
 const foodPartnerModel = require("../models/foodPartner.model");
+const { validationResult } = require("express-validator");
 
 //user register
 exports.postRegisterUser = async (req, res) => {
+    const errors=validationResult(req)
+    if(!errors.isEmpty()){
+        res.status(400).json({
+            message:'invalid places ',
+            errors:errors.array()[0].msg
+        })
+    }
     try {
         const { fullName, email, password } = req.body;
 
@@ -39,6 +47,13 @@ exports.postRegisterUser = async (req, res) => {
 }
 
 exports.postLoginUser = async (req, res) => {
+    const errors=validationResult(req)
+    if(!errors.isEmpty()){
+        res.status(400).json({
+            message:"invalid places",
+            errors:errors.array()[0].msg
+        })
+    }
     try {
         const { email, password } = req.body;
         const isExist = await userModel.findOne({ email })
@@ -90,8 +105,17 @@ exports.postLogoutUser = (req, res) => {
 
 // foodPartner register
 exports.postRegisterFoodPartner = async (req, res) => {
+
+    const errors=validationResult(req)
+    if(!errors.isEmpty()){
+        res.status(400).json({
+            message:"invalid places",
+            errors:errors.array()[0].msg
+        })
+    }
+
     try {
-        const { fullName, email, password } = req.body
+        const { fullName, email, password,phoneNumber,address } = req.body
         const isExist = await foodPartnerModel.findOne({ email })
         if (isExist) {
             return res.status(409).json({
@@ -99,7 +123,7 @@ exports.postRegisterFoodPartner = async (req, res) => {
             })
         }
         const hashPassword = await bcrypt.hash(password, 13)
-        const user = await foodPartnerModel.create({ fullName, email, password: hashPassword })
+        const user = await foodPartnerModel.create({ fullName, email, password: hashPassword,phoneNumber,address })
 
         const token = jwt.sign({
             id: user._id
@@ -111,7 +135,9 @@ exports.postRegisterFoodPartner = async (req, res) => {
             user: {
                 id: user._id,
                 fullName: user.fullName,
-                email: user.email
+                email: user.email,
+                phoneNumber:user.phoneNumber,
+                address:user.address
             }
         })
 
@@ -124,6 +150,13 @@ exports.postRegisterFoodPartner = async (req, res) => {
 }
 
 exports.postLoginFoodPartner = async (req, res) => {
+    const errors=validationResult(req)
+    if(!errors.isEmpty()){
+        res.status(400).json({
+            message:"invalid places ",
+            errors:errors.array()[0].msg
+        })
+    }
     try {
         const { email, password } = req.body;
         const isExist = await foodPartnerModel.findOne({ email })
@@ -147,15 +180,16 @@ exports.postLoginFoodPartner = async (req, res) => {
             user: {
                 id: isExist._id,
                 fullName: isExist.fullName,
-                email: isExist.email
+                email: isExist.email,
+                phoneNumber:isExist.phoneNumber,
+                address:isExist.address
             }
         })
-
-    } catch (error) {
+    }
+     catch (error) {
         res.status(500).json({
             message: "internal server error"
         })
-
     }
 }
 
