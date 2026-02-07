@@ -1,11 +1,17 @@
-const mongoose=require('mongoose')
+const mongoose = require('mongoose')
 
 function connectToDB() {
+    if (!process.env.MONGO_URL) {
+        console.warn('  MONGO_URL not set in environment variables')
+        return
+    }
+    
     mongoose.connect(process.env.MONGO_URL)
     .then(() => {
-        console.log('mongo connected')
-    }).catch((err)=>{
-        console.log('mongo not connected',err)
+        console.log('MongoDB connected')
+    }).catch((err) => {
+        console.error(' MongoDB connection failed:', err.message)
     })
 }
-module.exports=connectToDB
+
+module.exports = connectToDB
