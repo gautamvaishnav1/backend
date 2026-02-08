@@ -1,9 +1,10 @@
+import React from "react"
 import api from "../API/api"
 
  export default function UserLogin() {
   const handleOnSubmit=async(e)=>{
     e.preventDefault()
-    api.post('/auth/login',{
+    api.post(`/api/auth/user/login`,{
       email:e.target.email.value,
       password:e.target.password.value
     }).then(res=>{

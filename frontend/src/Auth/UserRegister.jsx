@@ -8,7 +8,7 @@ const UserRegister = () => {
       fullName: e.target.fullName.value,
       email: e.target.email.value,
       password: e.target.password.value }
-      api.post('/auth/register', formData)
+      api.post(`/api/auth/user/register`, formData)
       .then(res => {
         console.log('Registration successful:', res.data)
       })

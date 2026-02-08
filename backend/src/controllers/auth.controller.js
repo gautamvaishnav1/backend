@@ -8,12 +8,13 @@ const { validationResult } = require("express-validator");
 exports.postRegisterUser = async (req, res) => {
     const errors=validationResult(req)
     if(!errors.isEmpty()){
-        res.status(400).json({
+       return res.status(400).json({
             message:'invalid places ',
             errors:errors.array()[0].msg
         })
     }
     try {
+        console.log(req.body)
         const { fullName, email, password } = req.body;
 
 
@@ -49,7 +50,7 @@ exports.postRegisterUser = async (req, res) => {
 exports.postLoginUser = async (req, res) => {
     const errors=validationResult(req)
     if(!errors.isEmpty()){
-        res.status(400).json({
+      return  res.status(400).json({
             message:"invalid places",
             errors:errors.array()[0].msg
         })
@@ -108,7 +109,7 @@ exports.postRegisterFoodPartner = async (req, res) => {
 
     const errors=validationResult(req)
     if(!errors.isEmpty()){
-        res.status(400).json({
+      return  res.status(400).json({
             message:"invalid places",
             errors:errors.array()[0].msg
         })
@@ -152,7 +153,7 @@ exports.postRegisterFoodPartner = async (req, res) => {
 exports.postLoginFoodPartner = async (req, res) => {
     const errors=validationResult(req)
     if(!errors.isEmpty()){
-        res.status(400).json({
+       return res.status(400).json({
             message:"invalid places ",
             errors:errors.array()[0].msg
         })
