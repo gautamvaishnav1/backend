@@ -116,6 +116,7 @@ exports.postRegisterFoodPartner = async (req, res) => {
     }
 
     try {
+        console.log(req.body)
         const { fullName, email, password,phoneNumber,address } = req.body
         const isExist = await foodPartnerModel.findOne({ email })
         if (isExist) {

@@ -1,11 +1,34 @@
+import axios from 'axios';
 import React from 'react'
+import { foodPartnerRegisterApi } from '../API/authAPI';
+import { useNavigate } from 'react-router-dom';
 
 export default function FoodPartnerRegister() {
+   const navigate=useNavigate()
+  const handleOnSubmit=async(e)=>{
+   e.preventDefault() ;
+    
+   try {
+     const fullName=e.target.fullName.value;
+    const email=e.target.email.value;
+    const password=e.target.password.value;
+    const phoneNumber=e.target.phoneNumber.value;
+    const address=e.target.address.value;
+    const formData={fullName,email,password,phoneNumber,address};
+    console.log(formData)
+      const response= await axios.post(foodPartnerRegisterApi,formData)
+      console.log(response.data)
+      navigate('/')
+    
+   } catch (error) {
+    console.log(error)
+   }
+  }
   return (
     <div className="max-w-2xl mx-auto p-6">
       <h2 className="text-center text-2xl font-semibold mb-6">Food Partner Registration</h2>
 
-      <form className="space-y-6" noValidate>
+      <form className="space-y-6" noValidate onSubmit={handleOnSubmit}>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">Business Name</label>
@@ -63,15 +86,7 @@ export default function FoodPartnerRegister() {
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Confirm Password</label>
-            <input
-              type="password"
-              name='confirm password'
-              placeholder="Confirm password"
-              className="mt-2 block w-full rounded-md border-gray-300 shadow-sm p-2 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
+          
         </div>
 
       
