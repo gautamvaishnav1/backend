@@ -1,20 +1,22 @@
 import React from 'react'
+import axios from 'axios'
 import api from '../API/api'
+import { userRegisterAPi } from '../API/authAPI'
+import { useNavigate } from 'react-router-dom'
 
 const UserRegister = () => {
-  const handleSubmit = (e) => {
+  const navigate=useNavigate()
+  const handleSubmit = async(e) => {
     e.preventDefault() 
     const formData = {
       fullName: e.target.fullName.value,
       email: e.target.email.value,
       password: e.target.password.value }
-      api.post(`/api/auth/user/register`, formData)
-      .then(res => {
-        console.log('Registration successful:', res.data)
-      })
-      .catch(err => {
-        console.error('Registration failed:', err)
-      })  
+       const response=await  axios.post(userRegisterAPi,formData,{withCredentials:true});
+       console.log(response.data)
+       navigate('/')
+     
+    
   }
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">

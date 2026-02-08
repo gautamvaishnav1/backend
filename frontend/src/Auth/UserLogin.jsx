@@ -1,10 +1,12 @@
 import React from "react"
 import api from "../API/api"
+import { userLoginApi } from "../API/authAPI"
+import axios from "axios"
 
  export default function UserLogin() {
   const handleOnSubmit=async(e)=>{
     e.preventDefault()
-    api.post(`/api/auth/user/login`,{
+    axios.post(userLoginApi,{
       email:e.target.email.value,
       password:e.target.password.value
     }).then(res=>{
