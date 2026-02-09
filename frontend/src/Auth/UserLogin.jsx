@@ -1,16 +1,17 @@
 import React, { useState } from "react"
 import api from "../API/api"
 import { userLoginApi } from "../API/authAPI"
-import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
  export default function UserLogin() {
   const [error, setError] = useState('')
+  
+    const navigate=useNavigate()
 
   const handleOnSubmit=async(e)=>{
-    const navigate=useNavigate()
-    setError('')
+    
     e.preventDefault()
+    setError('')
     try {
       
     const email=e.target.email.value;

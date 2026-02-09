@@ -6,8 +6,8 @@ import api from '../API/api';
 
 export default function FoodPartnerLogin() {
   const [error, setError] = useState('')
+   const navigate=useNavigate()
   const handleOnSubmit=async(e)=>{
-    const navigate=useNavigate()
     setError('')
  try {
      console.log(e.target.value)
