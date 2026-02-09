@@ -46,7 +46,7 @@ const Footer = () => {
       >
         <MdOndemandVideo />
       </NavLink>
-
+        hii
       <button
         onClick={handleLogout}
         className="text-2xl text-red-500 hover:text-red-600 transition"
