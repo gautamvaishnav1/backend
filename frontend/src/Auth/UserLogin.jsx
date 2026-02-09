@@ -1,20 +1,28 @@
-import React from "react"
+import React, { useState } from "react"
 import api from "../API/api"
 import { userLoginApi } from "../API/authAPI"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
  export default function UserLogin() {
+  const [error, setError] = useState('')
+
   const handleOnSubmit=async(e)=>{
+    const navigate=useNavigate()
+    setError('')
     e.preventDefault()
-    axios.post(userLoginApi,{
-      email:e.target.email.value,
-      password:e.target.password.value
-    }).then(res=>{
-      console.log(res.data)
-    }).catch(err=>{
+    try {
+      
+    const email=e.target.email.value;
+    const password=e.target.password.value;
+    const formData={email,password}
+    const response=await api.post(userLoginApi,formData,{withCredentials:true})
+    console.log(response.data)
+      navigate('/')
+    } catch (err) {
       console.log(err)
-    })
-    console.log(e.target.email.value,e.target.password.value)
+      setError(err?.response?.data?.errors||err?.response?.data?.message)
+    }
   }
   return (
     <div className="max-w-md mx-auto p-6">
@@ -22,6 +30,9 @@ import axios from "axios"
 
       <form noValidate onSubmit={handleOnSubmit} className="space-y-4">
         <div>
+            {error && (
+          <p className="text-red-600 text-sm text-center">{error}</p>
+        )}
           <label className="block text-sm font-medium text-gray-700">Email</label>
           <input
             type="email"

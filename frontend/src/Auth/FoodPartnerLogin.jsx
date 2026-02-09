@@ -1,13 +1,30 @@
-import React from 'react'
+
+import React, { useState } from 'react'
+import { foodPartnerLoginApi } from '../API/authAPI';
+import { useNavigate } from 'react-router-dom';
+import api from '../API/api';
 
 export default function FoodPartnerLogin() {
+  const [error, setError] = useState('')
   const handleOnSubmit=async(e)=>{
-    console.log(e.target.value)
+    const navigate=useNavigate()
+    setError('')
+ try {
+     console.log(e.target.value)
     
     const email=e.target.email.value;
     const password=e.target.password.value;
+    const formData={email,password}
    console.log(email,passwords)
+      const response=await api.post(foodPartnerLoginApi,formData,{withCredentials:true})
+        console.log(response.data)
+        navigate('/')
+ } catch (err) {
+  console.log(err) ;
+   setError(err?.response?.data?.errors || err?.response?.data?.message)
+ }
 
+ console.log(error,"ewrowi")
   }
 
   return (
@@ -16,6 +33,9 @@ export default function FoodPartnerLogin() {
         <h2 className="mb-6 text-center text-2xl font-semibold text-gray-800">Food Partner Sign in</h2>
 
         <form className="space-y-5" noValidate onSubmit={handleOnSubmit}>
+            {error && (
+          <p className="text-red-600 text-sm text-center">{error}</p>
+        )}
           <div>
             <label className="block text-sm font-medium text-gray-700">Email</label>
             <input

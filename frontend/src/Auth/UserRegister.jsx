@@ -1,22 +1,31 @@
-import React from 'react'
-import axios from 'axios'
+import React, { useState } from 'react'
 import api from '../API/api'
 import { userRegisterAPi } from '../API/authAPI'
 import { useNavigate } from 'react-router-dom'
 
 const UserRegister = () => {
+
+  const [error, setError] = useState('')
+
   const navigate=useNavigate()
   const handleSubmit = async(e) => {
     e.preventDefault() 
-    const formData = {
+    try {
+      setError('')
+       const formData = {
       fullName: e.target.fullName.value,
       email: e.target.email.value,
       password: e.target.password.value }
-       const response=await  axios.post(userRegisterAPi,formData,{withCredentials:true});
+       const response=await  api.post(userRegisterAPi,formData,{withCredentials:true});
        console.log(response.data)
        navigate('/')
+    } catch (err) {
+      console.log(err)
+        setError(err?.response?.data?.errors || err?.response?.data?.message)
+    }
      
-    
+    console.log(error,"eirewp")
+   
   }
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
@@ -26,6 +35,9 @@ const UserRegister = () => {
           <p className="text-sm text-gray-500 mt-1 mb-4">Get started — it only takes a few clicks.</p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
+              {error && (
+          <p className="text-red-600 text-sm text-center">{error}</p>
+        )}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Full name</label>
               <input

@@ -6,7 +6,11 @@ const authRouter = require('./routes/auth.route')
 const foodRouter = require('./routes/food.route')
 const app = express()
 
-app.use(cors())
+app.use(cors({
+  origin: "https://didactic-meme-97jrvxvrgvg6fxq5g-5173.app.github.dev", // your frontend
+  credentials: true
+}))
+
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

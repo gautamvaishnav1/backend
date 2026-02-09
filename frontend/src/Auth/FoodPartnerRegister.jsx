@@ -1,12 +1,16 @@
-import axios from 'axios';
-import React from 'react'
+
+import React, { useState } from 'react'
 import { foodPartnerRegisterApi } from '../API/authAPI';
 import { useNavigate } from 'react-router-dom';
+import api from '../API/api';
 
 export default function FoodPartnerRegister() {
+  const [error, setError] = useState('')
+
    const navigate=useNavigate()
   const handleOnSubmit=async(e)=>{
    e.preventDefault() ;
+   setError('')
     
    try {
      const fullName=e.target.fullName.value;
@@ -16,12 +20,13 @@ export default function FoodPartnerRegister() {
     const address=e.target.address.value;
     const formData={fullName,email,password,phoneNumber,address};
     console.log(formData)
-      const response= await axios.post(foodPartnerRegisterApi,formData)
+      const response= await api.post(foodPartnerRegisterApi,formData,{withCredentials:true})
       console.log(response.data)
       navigate('/')
     
-   } catch (error) {
-    console.log(error)
+   } catch (err) {
+    console.log(err)
+    setError(err?.response?.data?.errors||err?.response?.data?.message)
    }
   }
   return (
@@ -29,6 +34,9 @@ export default function FoodPartnerRegister() {
       <h2 className="text-center text-2xl font-semibold mb-6">Food Partner Registration</h2>
 
       <form className="space-y-6" noValidate onSubmit={handleOnSubmit}>
+          {error && (
+          <p className="text-red-600 text-sm text-center">{error}</p>
+        )}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">Business Name</label>
