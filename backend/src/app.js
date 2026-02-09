@@ -4,10 +4,11 @@ const cors=require('cors')
 const cookieParser = require('cookie-parser')
 const authRouter = require('./routes/auth.route')
 const foodRouter = require('./routes/food.route')
+const userInfoRouter = require('./routes/userInfo.route')
 const app = express()
 
 app.use(cors({
-  origin: "https://didactic-meme-97jrvxvrgvg6fxq5g-5173.app.github.dev", // your frontend
+  origin: "https://obscure-space-guide-5gxj696j76pvc7rj-5173.app.github.dev", // your frontend
   credentials: true
 }))
 
@@ -20,5 +21,5 @@ app.get('/', (req, res) => {
 })
 app.use('/api/auth', authRouter)
 app.use('/api/food', foodRouter)
-
+app.use('/api/found',userInfoRouter)
 module.exports = app

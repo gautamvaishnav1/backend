@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom"
     const formData={email,password}
     const response=await api.post(userLoginApi,formData,{withCredentials:true})
     console.log(response.data)
-      navigate('/')
+      navigate('/user')
     } catch (err) {
       console.log(err)
       setError(err?.response?.data?.errors||err?.response?.data?.message)
