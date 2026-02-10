@@ -33,6 +33,7 @@ exports.postRegisterUser = async (req, res) => {
         res.status(201).json({
             message: 'user registered successfully',
             user: {
+                role:'user',
                 id: user._id,
                 fullName: user.fullName,
                 email: user.email
@@ -75,6 +76,7 @@ exports.postLoginUser = async (req, res) => {
         res.status(200).json({
             message: 'user log in successFully',
             user: {
+                role:'user',
                 fullName: isExist.fullName,
                 email: isExist.email,
                 id: isExist._id,
@@ -135,6 +137,7 @@ exports.postRegisterFoodPartner = async (req, res) => {
         res.status(201).json({
             message: 'food partner registered successfully',
             user: {
+                role:'foodPartner',
                 id: user._id,
                 fullName: user.fullName,
                 email: user.email,
@@ -180,6 +183,7 @@ exports.postLoginFoodPartner = async (req, res) => {
         res.status(200).json({
             message: "user login successfully",
             user: {
+                role:'foodPartner',
                 id: isExist._id,
                 fullName: isExist.fullName,
                 email: isExist.email,

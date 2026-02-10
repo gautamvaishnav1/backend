@@ -10,6 +10,7 @@ const UserInfoElement = () => {
       try {
         const res = await api.get(UserInfo)
         setUser(res.data.user)
+        console.log(res.data.user.role)
       } catch (error) {
         console.log(error)
       }

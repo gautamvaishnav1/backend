@@ -8,23 +8,24 @@ export default function FoodPartnerLogin() {
   const [error, setError] = useState('')
    const navigate=useNavigate()
   const handleOnSubmit=async(e)=>{
+    e.preventDefault()
     setError('')
  try {
-     console.log(e.target.value)
     
     const email=e.target.email.value;
     const password=e.target.password.value;
     const formData={email,password}
-   console.log(email,passwords)
+   console.log(email,password)
       const response=await api.post(foodPartnerLoginApi,formData,{withCredentials:true})
         console.log(response.data)
-        navigate('/')
+        localStorage.setItem('role',response.data.user.role)
+        navigate('/foodPartner/createFood')
  } catch (err) {
   console.log(err) ;
    setError(err?.response?.data?.errors || err?.response?.data?.message)
  }
 
- console.log(error,"ewrowi")
+ 
   }
 
   return (
@@ -40,6 +41,7 @@ export default function FoodPartnerLogin() {
             <label className="block text-sm font-medium text-gray-700">Email</label>
             <input
               type="email"
+              name='email'
               placeholder="partner@business.com"
               className="mt-2 block w-full rounded-md border-gray-300 shadow-sm p-2 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
             />
@@ -49,6 +51,7 @@ export default function FoodPartnerLogin() {
             <label className="block text-sm font-medium text-gray-700">Password</label>
             <input
               type="password"
+              name='password'
               placeholder="Enter your password"
               className="mt-2 block w-full rounded-md border-gray-300 shadow-sm p-2 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
             />

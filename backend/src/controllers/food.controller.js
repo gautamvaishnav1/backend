@@ -4,6 +4,7 @@ const { v4: uuid } = require("uuid");
 
 exports.createFood = async (req, res) => {
   console.log(req.body, "body");
+
   const fileUploadResult = await storeAgeServices.uploadFile(
     req.file.buffer,
     uuid(),
@@ -18,7 +19,8 @@ exports.createFood = async (req, res) => {
   console.log(foodItemCreate);
   res.status(201).json({
     message: "success",
-    food:foodItemCreate
+    food:foodItemCreate,
+    role:'foodPartner'
   });
   console.log(fileUploadResult);
 };
@@ -28,7 +30,8 @@ exports.getAllFoodItems=async (req,res) => {
   const foodItems=await foodModel.find()
   res.status(200).json({
     message:"success",
-    foodItems:foodItems
+    foodItems:foodItems,
+    role:'user'
   })
 
   

@@ -18,6 +18,8 @@ const UserRegister = () => {
       password: e.target.password.value }
        const response=await  api.post(userRegisterAPi,formData,{withCredentials:true});
        console.log(response.data)
+       const role=response.data.user.role;
+       localStorage.setItem('role',role)
        navigate('/')
     } catch (err) {
       console.log(err)

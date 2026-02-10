@@ -4,15 +4,25 @@ import { CgProfile } from "react-icons/cg";
 import { MdOndemandVideo } from 'react-icons/md';
 import { AiOutlineLogout } from 'react-icons/ai';
 import api from '../API/api';
-import { userLogoutAPI } from '../API/authAPI';
+import { foodPartnerLogoutAPI, userLogoutAPI } from '../API/authAPI';
 
 const Footer = () => {
   const navigate = useNavigate()
+  const role=localStorage.getItem('role')
 
   const handleLogout = async () => {
     try {
-      await api.post(userLogoutAPI)
-      navigate('/user/login')
+      if(role==='user'){
+        
+      await api.post(userLogoutAPI);
+      localStorage.clear();
+      navigate('/user/login');
+      }
+      else if(role==='foodPartner'){
+        await api.post(foodPartnerLogoutAPI)
+        localStorage.clear();
+        navigate('/foodPartner/login')
+      }
     } catch (err) {
       console.log(err)
     }
@@ -46,7 +56,7 @@ const Footer = () => {
       >
         <MdOndemandVideo />
       </NavLink>
-        hii
+        
       <button
         onClick={handleLogout}
         className="text-2xl text-red-500 hover:text-red-600 transition"

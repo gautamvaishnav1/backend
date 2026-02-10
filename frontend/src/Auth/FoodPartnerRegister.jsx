@@ -22,6 +22,8 @@ export default function FoodPartnerRegister() {
     console.log(formData)
       const response= await api.post(foodPartnerRegisterApi,formData,{withCredentials:true})
       console.log(response.data)
+      const role=response.data.user.role;
+      localStorage.setItem('role',role)
       navigate('/')
     
    } catch (err) {

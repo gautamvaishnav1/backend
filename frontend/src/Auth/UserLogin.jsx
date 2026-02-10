@@ -19,6 +19,8 @@ import { useNavigate } from "react-router-dom"
     const formData={email,password}
     const response=await api.post(userLoginApi,formData,{withCredentials:true})
     console.log(response.data)
+    const role=response.data.user.role
+    localStorage.setItem('role',role)
       navigate('/user')
     } catch (err) {
       console.log(err)
