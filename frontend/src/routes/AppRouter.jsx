@@ -7,6 +7,7 @@ import FoodPartnerLogin from '../Auth/FoodPartnerLogin'
 import Footer from '../pages/Footer'
 import UserInfoElement from '../pages/Components/UserInfoElement'
 import CreateFood from '../pages/Components/CreateFood'
+import ReelsWatch from '../pages/Components/ReelsWatch'
 
 const AppRouter = () => {
     const role=localStorage.getItem('role')
@@ -14,7 +15,7 @@ const AppRouter = () => {
   return (
     <Router>
         <Routes>
-            <Route path='/' element={<div>{role}</div>}></Route>
+            <Route path='/' element={<ReelsWatch/>}></Route>
             {/* User */}
             <Route path='/user/register' element={<UserRegister />} />
             <Route path='/user' element={<UserInfoElement/>}></Route>
