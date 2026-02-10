@@ -8,7 +8,7 @@ const userInfoRouter = require('./routes/userInfo.route')
 const app = express()
 
 app.use(cors({
-  origin: "https://effective-robot-694q6p6qx6qrh4qp9-5173.app.github.dev", // your frontend
+  origin: "https://zany-chainsaw-v6q94549jxqw3x95-5173.app.github.dev", // your frontend
   credentials: true
 }))
 
