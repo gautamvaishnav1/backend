@@ -14,5 +14,16 @@ exports.userFindController=async(req,res)=>{
 
 
 exports.FoodPartnerFindController=async(req,res)=>{
+    console.log(req.foodPartner)
+    const foodPartner=req.foodPartner
+    res.status(200).json({
+        foodPartner:{
+            role:'foodPartner',
+            email:foodPartner.email,
+            fullName:foodPartner.fullName,
+            address:foodPartner.address,
+            phoneNumber:foodPartner.phoneNumber
 
+        }
+    })
 }
