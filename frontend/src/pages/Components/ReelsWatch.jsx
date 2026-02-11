@@ -2,26 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import api from "../../API/api";
 import { getFoodAPI } from "../../API/Food";
 
-const dummyReels = [
-  {
-    _id: "1",
-    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
-    caption: "Big Buck Bunny 🐰",
-    user: { name: "rahul_dev" },
-  },
-  {
-    _id: "2",
-    videoUrl: "https://www.w3schools.com/html/movie.mp4",
-    caption: "Street food vibes 🔥",
-    user: { name: "foodie_amit" },
-  },
-  {
-    _id: "3",
-    videoUrl: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
-    caption: "Nature feels 🌸",
-    user: { name: "nature_love" },
-  },
-];
+
 
 const ReelsWatch = () => {
   const [reels, setReels] = useState([]);
@@ -31,7 +12,7 @@ const ReelsWatch = () => {
     const getFoodReels=async()=>{
         
         const res= await api.get(getFoodAPI,{withCredentials:true})
-        
+        console.log(res.data.foodItems[0].foodPartner)
     setTimeout(() => setReels(res.data.foodItems), 300);
     }
     getFoodReels()
@@ -82,6 +63,7 @@ const ReelsWatch = () => {
               {/* Bottom Left Info */}
               <div className="absolute bottom-20 left-4 text-white">
                 <h3 className="font-semibold">@{reel.name}</h3>
+                <h1 className="text-3xl">{reel.foodPartner}</h1>
                 <p className="text-sm opacity-90">{reel.description}</p>
               </div>
 

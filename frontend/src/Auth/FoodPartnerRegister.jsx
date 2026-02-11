@@ -24,7 +24,7 @@ export default function FoodPartnerRegister() {
       console.log(response.data)
       const role=response.data.user.role;
       localStorage.setItem('role',role)
-      navigate('/')
+      navigate('/foodPartner')
     
    } catch (err) {
     console.log(err)

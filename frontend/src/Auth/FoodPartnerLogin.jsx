@@ -19,7 +19,7 @@ export default function FoodPartnerLogin() {
       const response=await api.post(foodPartnerLoginApi,formData,{withCredentials:true})
         console.log(response.data)
         localStorage.setItem('role',response.data.user.role)
-        navigate('/foodPartner/createFood')
+        navigate('/foodPartner')
  } catch (err) {
   console.log(err) ;
    setError(err?.response?.data?.errors || err?.response?.data?.message)

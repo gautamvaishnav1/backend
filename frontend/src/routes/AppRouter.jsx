@@ -25,10 +25,10 @@ const AppRouter = () => {
             {/* food partner */}
             <Route path='/foodPartner/register' element={<FoodPartnerRegister />} />
             <Route path='/foodPartner/login' element={<FoodPartnerLogin />} />
-              {  role==='foodPartner'&& (<>
-            <Route path='/foodPartner/createFood' element={<CreateFood/>}></Route>
-                <Route path='/foodPartner' element={<FoodPartnerInfoElement/>}></Route>
-            </>)}
+              {  role==='foodPartner'
+              &&<Route path='/foodPartner/createFood' element={<CreateFood/>}></Route>
+            }
+            <Route path='/foodPartner' element={<FoodPartnerInfoElement/>}></Route>
         </Routes>
         <Footer />
     </Router>
