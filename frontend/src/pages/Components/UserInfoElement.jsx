@@ -8,7 +8,7 @@ const UserInfoElement = () => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const res = await api.get(UserInfo)
+        const res = await api.get(UserInfo,{withCredentials:true})
         setUser(res.data.user)
         console.log(res.data.user.role)
       } catch (error) {

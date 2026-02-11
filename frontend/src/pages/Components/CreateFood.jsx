@@ -16,8 +16,10 @@ const CreateFood = () => {
              fd.append('description',description)
             const res= await api.post(createFoodAPI,fd,{withCredentials:true})
             console.log(res.data.role)
-        } catch (error) {
-            console.log(error)
+        } catch (err) {
+          console.log(err?.response?.data?.errors)
+            console.log(err?.response?.data?.errors||err?.response?.data?.message)
+
         }
     }
   return (

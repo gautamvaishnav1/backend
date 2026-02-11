@@ -40,7 +40,7 @@ const Footer = () => {
       "
     >
       <NavLink
-        to="/user"
+        to={`${role==='foodPartner'?'/foodPartner':'/user'}`}
         className={({ isActive }) =>
           `text-2xl ${isActive ? "text-green-600" : "text-gray-500"}`
         }
