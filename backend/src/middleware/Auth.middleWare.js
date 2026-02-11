@@ -4,13 +4,14 @@ const userModel = require('../models/user.model');
 
 exports.authFoodPartnerMiddleware=async(req,res,next)=>{
     const token=req.cookies.token;
-    if(!token){
+        if(!token){
         return res.status(401).json({
             message:"unauthorized access please login first"
         })
     }
     try {
         const decode=jwt.verify(token,process.env.JWT_SECRET);
+        
         const foodPartner=await foodPartnerModel.findById(decode.id);
         req.foodPartner=foodPartner;
         next()

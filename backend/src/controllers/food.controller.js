@@ -1,10 +1,18 @@
+const { validationResult } = require("express-validator");
 const foodModel = require("../models/food.model");
 const storeAgeServices = require("../services/storage.service");
 const { v4: uuid } = require("uuid");
 
 exports.createFood = async (req, res) => {
   console.log(req.body, "body");
-
+  const errors=validationResult(req)
+ if(!errors.isEmpty()){
+       return res.status(400).json({
+            message:errors.array()[0].msg
+        })
+    }
+try {
+  
   const fileUploadResult = await storeAgeServices.uploadFile(
     req.file.buffer,
     uuid(),
@@ -23,7 +31,14 @@ exports.createFood = async (req, res) => {
     role:'foodPartner'
   });
   console.log(fileUploadResult);
-};
+}
+  
+ catch (error) {
+      res.status(500).json({
+        message:"internal server error"
+      })
+  
+}}
 
 
 exports.getAllFoodItems=async (req,res) => {

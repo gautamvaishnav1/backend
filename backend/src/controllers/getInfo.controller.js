@@ -1,6 +1,6 @@
 const userModel=require('../models/user.model')
-const jwt=require('jsonwebtoken')
 exports.userFindController=async(req,res)=>{
+    console.log(req,"body")
     console.log(req.user)
     const user=req.user
         res.status(200).json({
@@ -10,4 +10,9 @@ exports.userFindController=async(req,res)=>{
                 fullName:user.fullName,
             }
         })
+}
+
+
+exports.FoodPartnerFindController=async(req,res)=>{
+
 }
