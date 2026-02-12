@@ -21,7 +21,7 @@ import { useNavigate } from "react-router-dom"
     console.log(response.data)
     const role=response.data.user.role
     localStorage.setItem('role',role)
-      navigate('/user')
+      navigate('/')
     } catch (err) {
       console.log(err)
       setError(err?.response?.data?.errors||err?.response?.data?.message)

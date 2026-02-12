@@ -1,9 +1,12 @@
 import React from "react";
 import api from "../../API/api";
 import { createFoodAPI } from "../../API/Food";
+import { useNavigate } from "react-router-dom";
 
 const CreateFood = () => {
+    const Navigate= useNavigate()
     const handleOnSubmit=async(e)=>{
+
        e.preventDefault()
      console.log(e)
         try {
@@ -15,6 +18,7 @@ const CreateFood = () => {
              fd.append('video',buffer);
              fd.append('description',description)
             const res= await api.post(createFoodAPI,fd,{withCredentials:true})
+            Navigate('/foodPartner')
             console.log(res.data.role)
         } catch (err) {
           console.log(err?.response?.data?.errors)
