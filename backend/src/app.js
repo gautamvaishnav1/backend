@@ -8,7 +8,7 @@ const userInfoRouter = require('./routes/userInfo.route')
 const app = express()
 
 app.use(cors({
-  origin: "https://animated-telegram-5gxj696j7jq437xwr-5173.app.github.dev", // your frontend
+  origin: "https://organic-waddle-v6q9454996w4f9v7-5173.app.github.dev", // your frontend
   credentials: true
 }))
 

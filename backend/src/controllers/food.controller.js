@@ -4,7 +4,7 @@ const storeAgeServices = require("../services/storage.service");
 const { v4: uuid } = require("uuid");
 
 exports.createFood = async (req, res) => {
-  console.log(req.body, "body");
+ 
   const errors=validationResult(req)
  if(!errors.isEmpty()){
        return res.status(400).json({
@@ -30,7 +30,6 @@ try {
     food:foodItemCreate,
     role:'foodPartner'
   });
-  console.log(fileUploadResult);
 }
   
  catch (error) {

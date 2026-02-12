@@ -1,7 +1,8 @@
 const userModel=require('../models/user.model')
+const foodPartnerModel=require('../models/foodPartner.model')
+const foodModel = require('../models/food.model')
 exports.userFindController=async(req,res)=>{
-    console.log(req,"body")
-    console.log(req.user)
+ 
     const user=req.user
         res.status(200).json({
             user:{
@@ -14,14 +15,18 @@ exports.userFindController=async(req,res)=>{
 
 
 exports.FoodPartnerFindController=async(req,res)=>{
-    console.log(req.foodPartner)
     const foodPartner=req.foodPartner
+    const ID=req.foodPartner._id
+            const reels=await foodModel.find({foodPartner:ID})
+            
     res.status(200).json({
         foodPartner:{
             role:'foodPartner',
             email:foodPartner.email,
             fullName:foodPartner.fullName,
             address:foodPartner.address,
+            id:foodPartner._id,
+            reels:reels,
             phoneNumber:foodPartner.phoneNumber
 
         }
