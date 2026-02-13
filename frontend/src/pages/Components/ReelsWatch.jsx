@@ -40,9 +40,14 @@ const ReelsWatch = () => {
     return () => observer.disconnect();
   }, [reels]);
 
-  const handleOnSubmitLike=async()=>{
-    const res=await api.post('/api/like',{withCredentials:true})
-    console.log('user')
+  const handleOnSubmitLike=async(postId)=>{
+    try {
+      console.log(postId)
+    const res=await api.post('/api/like',{postId},{withCredentials:true})
+    
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -74,7 +79,7 @@ const ReelsWatch = () => {
 
               {/* Right Side Actions */}
               <div className="absolute right-4 bottom-20 flex flex-col gap-4 text-white text-xl">
-                <button onClick={handleOnSubmitLike} className="active:scale-95">❤️</button>
+                <button onClick={()=>handleOnSubmitLike(reel._id)} className="active:scale-95">❤️</button>
                 {/* <button className="active:scale-95">💬</button>
                 <button className="active:scale-95">🔗</button> */}
               </div>
