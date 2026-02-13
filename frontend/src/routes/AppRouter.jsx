@@ -8,11 +8,10 @@ import Footer from '../pages/Footer'
 import UserInfoElement from '../pages/Components/UserInfoElement'
 import CreateFood from '../pages/Components/CreateFood'
 import ReelsWatch from '../pages/Components/ReelsWatch'
-import FoodPartnerInfoElement from '../pages/Components/FoodPartnerInfoElement'
-
+import FoodPartnerInfoElementByUser from '../pages/Components/FoodPartnerInfoElementByUser'
+import FoodPartnerInfoByFoodPartner from '../pages/Components/FoodPartnerInfoByFoodPartner'
 const AppRouter = () => {
     const role=localStorage.getItem('role');
-    console.log(localStorage.getItem('role'))
   return (
     <Router>
         <Routes>
@@ -21,8 +20,7 @@ const AppRouter = () => {
           }
           
                <Route path='/user/login' element={<UserLogin />} ></Route>
-            <Route     path='/' 
-             element={!role?<Navigate to='/user/login' />:<ReelsWatch/>}>
+            <Route  path='/'  element={!role?<Navigate to='/user/login' />:<ReelsWatch/>}>
              </Route>
 
             {/* User */}
@@ -31,7 +29,7 @@ const AppRouter = () => {
             path='/user'
              element={ role=='user'?<UserInfoElement/>:<Navigate to='/user/login'/>  }>
               </Route>
-           
+           <Route path='/foodPartner/:id' element={<FoodPartnerInfoElementByUser/>}></Route>
 
             {/* food partner */}
             <Route path='/foodPartner/register' element={<FoodPartnerRegister />} />
@@ -39,7 +37,7 @@ const AppRouter = () => {
           <Route 
           path='/foodPartner/createFood' 
           element={role=='foodPartner'?<CreateFood/>:<Navigate to='/foodPartner/login'/>}></Route>
-            <Route path='/foodPartner' element={<FoodPartnerInfoElement/>}></Route>
+            <Route path='/foodPartner' element={<FoodPartnerInfoByFoodPartner/>}></Route>
         </Routes>
         <Footer />
     </Router>

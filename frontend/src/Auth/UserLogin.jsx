@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import api from "../API/api"
 import { userLoginApi } from "../API/authAPI"
-import { useNavigate } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 
  export default function UserLogin() {
   const [error, setError] = useState('')
@@ -65,9 +65,12 @@ import { useNavigate } from "react-router-dom"
         </div>
       </form>
 
-      <p className="mt-4 text-center text-sm text-gray-600">
-        Don't have an account? Register from the app's register screen.
-      </p>
+           <div className="flex justify-center  items-center">
+             <p className="mt-4 text-sm"> Don't have an account?.</p>
+      <NavLink to={'/user/register'} className="mt-4  text-sm hover:text-blue-400  text-blue-600">
+      Register Now
+      </NavLink>
+           </div>
     </div>
   )
 }

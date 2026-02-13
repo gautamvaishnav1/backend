@@ -32,11 +32,11 @@ const Footer = () => {
     <nav
       className="
         fixed bottom-2 left-1/2 -translate-x-1/2
-        w-full sm:w-[380px]
+        w-full sm:w-95
         bg-white shadow-lg border
         rounded-2xl
         px-4 py-2
-        flex items-center justify-between
+        flex items-center justify-evenly
       "
     >
       <NavLink
@@ -57,13 +57,13 @@ const Footer = () => {
         <MdOndemandVideo />
       </NavLink>
         
-      <button
+    {role&&  <button
         onClick={handleLogout}
         className="text-2xl text-red-500 hover:text-red-600 transition"
         title="Logout"
       >
         <AiOutlineLogout />
-      </button>
+      </button>}
     </nav>
   )
 }

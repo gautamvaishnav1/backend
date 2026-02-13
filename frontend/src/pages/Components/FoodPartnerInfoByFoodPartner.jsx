@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 import api from '../../API/api'
-import { foodPartnerInfo } from '../../API/getInfo'
+import { foodPartnerInfo, foodPartnerInfoByUser } from '../../API/getInfo'
 
-const ProfilePage = () => {
+const FoodPartnerInfoByFoodPartner = () => {
+  const role=localStorage.getItem('role')
   const [profile, setProfile] = useState(null)
   const [reels, setReels] = useState([])
 
   useEffect(() => {
     const getProfile = async () => {
       try {
-        const res = await api.get(foodPartnerInfo, { withCredentials: true })
+        const res = await api.get(foodPartnerInfo,{withCredentials:true})
         setProfile(res.data.foodPartner)
-        console.log(res.data.foodPartner.reels)
         setReels(res.data.foodPartner.reels || [])
       } catch (err) {
         console.error(err)
@@ -52,14 +52,15 @@ const ProfilePage = () => {
       </div>
 
       {/* Action Button */}
-      <div className="flex justify-center mb-10">
+      {role==='foodPartner'&&
+       <div className="flex justify-center mb-10">
         <NavLink
           to="/foodPartner/createFood"
           className="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg shadow hover:bg-blue-700 transition"
         >
           + Create Food
         </NavLink>
-      </div>
+      </div>}
 
       {/* Reels Grid */}
       <div className="max-w-5xl mx-auto">
@@ -73,7 +74,7 @@ const ProfilePage = () => {
                 key={reel._id}
                 className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden"
               >
-             <img
+             <video
                 src={`${reel.video}?tr=w-400,h-250,cm-extract:frame-1000`}
                 alt={reel.name}
                 className="w-full h-48 object-cover rounded-lg shadow"
@@ -91,4 +92,4 @@ const ProfilePage = () => {
   )
 }
 
-export default ProfilePage
+export default FoodPartnerInfoByFoodPartner

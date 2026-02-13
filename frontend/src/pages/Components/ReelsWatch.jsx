@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import api from "../../API/api";
 import { getFoodAPI } from "../../API/Food";
+import { NavLink } from "react-router-dom";
 
 
 
@@ -12,7 +13,6 @@ const ReelsWatch = () => {
     const getFoodReels=async()=>{
         
         const res= await api.get(getFoodAPI,{withCredentials:true})
-        console.log(res.data.foodItems[0].foodPartner)
     setTimeout(() => setReels(res.data.foodItems), 300);
     }
     getFoodReels()
@@ -40,14 +40,19 @@ const ReelsWatch = () => {
     return () => observer.disconnect();
   }, [reels]);
 
+  const handleOnSubmitLike=async()=>{
+    const res=await api.post('/api/like',{withCredentials:true})
+    console.log('user')
+  }
+
   return (
-    <div className="h-[100dvh] w-full overflow-y-scroll snap-y snap-mandatory bg-black">
+    <div className="h-dvh w-full overflow-y-scroll snap-y snap-mandatory bg-black">
       <div className="flex justify-center">
-        <div className="w-full sm:w-[380px] md:w-[420px]">
+        <div className="w-full sm:w-95 md:w-105">
           {reels.map((reel, index) => (
             <div
               key={reel._id}
-              className="h-[100dvh] w-full snap-start relative flex items-center justify-center"
+              className="h-dvh w-full snap-start relative flex items-center justify-center"
             >
               {/* Video */}
               <video
@@ -63,16 +68,16 @@ const ReelsWatch = () => {
               {/* Bottom Left Info */}
               <div className="absolute bottom-20 left-4 text-white">
                 <h3 className="font-semibold">@{reel.name}</h3>
-                <h1 className="text-3xl">{reel.foodPartner}</h1>
+                <NavLink className='border rounded-2xl p-2' to={`/foodPartner/${reel.foodPartner}`} >Join</NavLink>
                 <p className="text-sm opacity-90">{reel.description}</p>
               </div>
 
               {/* Right Side Actions */}
-              {/* <div className="absolute right-4 bottom-20 flex flex-col gap-4 text-white text-xl">
-                <button className="active:scale-95">❤️</button>
-                <button className="active:scale-95">💬</button>
-                <button className="active:scale-95">🔗</button>
-              </div> */}
+              <div className="absolute right-4 bottom-20 flex flex-col gap-4 text-white text-xl">
+                <button onClick={handleOnSubmitLike} className="active:scale-95">❤️</button>
+                {/* <button className="active:scale-95">💬</button>
+                <button className="active:scale-95">🔗</button> */}
+              </div>
             </div>
           ))}
         </div>
