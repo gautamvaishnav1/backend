@@ -9,7 +9,7 @@ const likeRouter = require('./routes/like.route')
 const app = express()
 
 app.use(cors({
-  origin:process.env.FRONTEND_URL , 
+  origin:process.env.FRONTEND_URI, 
   credentials: true
 }))
 
