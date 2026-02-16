@@ -10,7 +10,7 @@ const saveRouter = require('./routes/save.route')
 const app = express()
 
 app.use(cors({
-  origin:'https://crispy-space-doodle-q7pjrxrj5jrjf5p9-5173.app.github.dev', 
+  origin:process.env.FRONTEND_URL, 
   credentials: true
 }))
 
