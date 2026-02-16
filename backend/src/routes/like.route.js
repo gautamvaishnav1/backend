@@ -3,7 +3,7 @@ const authMiddleware=require('../middleware/Auth.middleWare')
 const likeController=require('../controllers/like.controller')
 const likeRouter=express.Router()
 
-likeRouter.post('/like',authMiddleware.authUserMiddleware,likeController.postLikeByUser)
+likeRouter.post('/user/like',authMiddleware.authUserMiddleware,likeController.postLikeByUser)
 likeRouter.get('/user/like/:id',authMiddleware.authUserMiddleware,likeController.getLikeReelsByUser)
 
 module.exports=likeRouter

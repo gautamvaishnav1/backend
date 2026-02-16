@@ -22,14 +22,10 @@ exports.postLikeByUser=async(req,res)=>{
             userId:user._id,
             postId
         })
-        console.log(like)
         res.status(200).json({
             message:"food add success fully",
             like
-
         })
-
-
     } catch (error) {
         res.status(500).json({
             message:'internal server error'
@@ -41,26 +37,25 @@ exports.postLikeByUser=async(req,res)=>{
 
 exports.getLikeReelsByUser=async(req,res)=>{
     const id=req.user._id;
-   
-  try {
+ try {
     
       const likes=await likeModel.find({userId:id})
-      console.log(isExist)
     if(!likes){
         return res.status(200).json({
             message:"no reel like yet"
         })
     }
     const postIds=likes.map(like=>like.postId)
-    const reels=await foodModel.findById({_id:postIds})
-    console.log(reels)
+    
+    const reels=await foodModel.find({_id:postIds})
     res.status(200).json({
         message:"reels",
         reels
     })
-  } catch (error) {
+ } catch (error) {
     res.status(500).json({
-        message:"internal server error"
+        message:"internal server error",
+        error:error,
     })
   }
 

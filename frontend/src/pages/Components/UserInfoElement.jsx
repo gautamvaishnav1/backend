@@ -7,7 +7,8 @@ import { data } from 'react-router-dom'
 
 const UserInfoElement = () => {
   const [user, setUser] = useState(null)
-  const [likeReels, setLikeReels] = useState(null)
+  const [likeReels, setLikeReels] = useState([])
+  const [saveReels,setSaveReels]=useState([])
   useEffect(() => {
     const getUser = async () => {
       try {
@@ -31,8 +32,15 @@ const UserInfoElement = () => {
 
   const handleSaveReel=async(id)=>{
     console.log(id);
-    const res=await api.get(`/api/user/save/:${id}`,{withCredentials:true})
-    console.log(res)
+    try{
+      
+    const res=await api.get(`/api/user/save/${id}`,{withCredentials:true})
+    console.log(res.data)
+    setSaveReels(res.data.reels)
+    }
+    catch(err){
+      console.log(err)
+    }
   }
 
   return (
@@ -57,7 +65,6 @@ const UserInfoElement = () => {
       {user?.email || "—"}
     </p>
   </div>
-{console.log(likeReels)}
   {/* Reels / Actions */}
   <div className="grid grid-cols-2 gap-4 mt-10 
                   text-xl sm:text-2xl lg:text-3xl">
@@ -68,9 +75,8 @@ const UserInfoElement = () => {
       <LuSave className="cursor-pointer hover:text-blue-500 transition" />
     </button>
   </div>
-  {/* {likeReels.map((reels)=>console.log(reels))} */}
   
-      {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 mt-6 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {likeReels.map((reel) => (
           <div
             key={reel._id}
@@ -81,14 +87,24 @@ const UserInfoElement = () => {
               alt={reel.name}
               className="w-full h-48 object-cover rounded-lg shadow"
             />
-            <div className="p-4">
-              <h3 className="text-lg font-semibold text-gray-700">{reel.name}</h3>
-              <p className="text-sm text-gray-500">{reel.description}</p>
-            </div>
+            
           </div>
         ))}
-      </div> */}
-    
+      </div>
+       {saveReels.map((reel) => (
+          <div
+            key={reel._id}
+            className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden"
+          >
+            <video
+              src={`${reel.video}?tr=w-400,h-250,cm-extract:frame-1000`}
+              alt={reel.name}
+              className="w-full h-48 object-cover rounded-lg shadow"
+            />
+            
+          </div>
+        ))}
+      
 
 
 
