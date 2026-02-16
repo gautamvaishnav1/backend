@@ -9,7 +9,7 @@ const likeRouter = require('./routes/like.route')
 const app = express()
 
 app.use(cors({
-  origin:process.env.FRONTEND_URI, 
+  origin:'https://special-guide-97jrvxvrgr66fxwvj-5173.app.github.dev', 
   credentials: true
 }))
 

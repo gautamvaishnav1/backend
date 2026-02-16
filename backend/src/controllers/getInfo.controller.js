@@ -8,6 +8,7 @@ exports.userFindController=async(req,res)=>{
          res.status(200).json({
             user:{
                 role:'user',
+                id:user._id,
                 email:user.email,
                 fullName:user.fullName,
             }

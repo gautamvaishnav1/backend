@@ -70,11 +70,15 @@ const ReelsWatch = () => {
                 preload="metadata"
               />
 
-              {/* Bottom Left Info */}
-              <div className="absolute bottom-20 left-4 text-white">
+              <div className="absolute bottom-24 left-4 text-white">
                 <h3 className="font-semibold">@{reel.name}</h3>
-                <NavLink className='border rounded-2xl p-2' to={`/foodPartner/${reel.foodPartner}`} >Join</NavLink>
                 <p className="text-sm opacity-90">{reel.description}</p>
+                <NavLink 
+                  className="mt-2 inline-block bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg transition"
+                  to={`/foodPartner/${reel.foodPartner}`}
+                >
+                  Join Partner
+                </NavLink>
               </div>
 
               {/* Right Side Actions */}

@@ -1,3 +1,4 @@
+const foodModel = require('../models/food.model');
 const likeModel=require('../models/like.model')
 
 exports.postLikeByUser=async(req,res)=>{
@@ -35,5 +36,32 @@ exports.postLikeByUser=async(req,res)=>{
         })
     }
 
+
+}
+
+exports.getLikeReelsByUser=async(req,res)=>{
+    const id=req.user._id;
+   
+  try {
+    
+      const likes=await likeModel.find({userId:id})
+      console.log(isExist)
+    if(!likes){
+        return res.status(200).json({
+            message:"no reel like yet"
+        })
+    }
+    const postIds=likes.map(like=>like.postId)
+    const reels=await foodModel.findById({_id:postIds})
+    console.log(reels)
+    res.status(200).json({
+        message:"reels",
+        reels
+    })
+  } catch (error) {
+    res.status(500).json({
+        message:"internal server error"
+    })
+  }
 
 }

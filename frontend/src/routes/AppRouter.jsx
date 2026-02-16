@@ -20,7 +20,7 @@ const AppRouter = () => {
           }
           
                <Route path='/user/login' element={<UserLogin />} ></Route>
-            <Route  path='/'  element={role==='' ? <Navigate to='/user/login' /> : <ReelsWatch/>}>
+            <Route  path='/'  element={!role ? <Navigate to='/user/login' /> : <ReelsWatch/>}>
              </Route>
 
             {/* User */}
@@ -29,6 +29,8 @@ const AppRouter = () => {
             path='/user'
              element={ role=='user'?<UserInfoElement/>:<Navigate to='/user/login'/>  }>
               </Route>
+          
+
            <Route path='/foodPartner/:id' element={<FoodPartnerInfoElementByUser/>}></Route>
 
             {/* food partner */}
