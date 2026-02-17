@@ -41,7 +41,7 @@ const AppRouter = () => {
           element={role=='foodPartner'?<CreateFood/>:<Navigate to='/foodPartner/login'/>}></Route>
             <Route path='/foodPartner' element={<FoodPartnerInfoByFoodPartner/>}></Route>
         </Routes>
-        <Footer />
+       {role? <Footer />:null}
     </Router>
 
 )

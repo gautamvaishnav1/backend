@@ -10,7 +10,7 @@ const saveRouter = require('./routes/save.route')
 const app = express()
 
 app.use(cors({
-  origin:process.env.FRONTEND_URL, 
+  origin:'https://ominous-space-guacamole-g47j9p9jjq653wjvg-5173.app.github.dev', 
   credentials: true
 }))
 
