@@ -90,7 +90,7 @@ const ReelsWatch = () => {
               </div>
 
               {/* Right Side Actions */}
-              <div className="absolute right-4 bottom-20 flex flex-col gap-4 text-white text-xl">
+              <div className="absolute right-4 bottom-50 flex flex-col gap-4 gap-y-9 text-white text-xl">
                 <button onClick={()=>handleOnSubmitLike(reel._id)} className="active:scale-95">❤️</button>
                 <button onClick={()=>handleOnSubmitSave(reel._id)} className="active:scale-95">🔗</button> 
                 {/* <button className="active:scale-95">💬</button>*/}

@@ -9,6 +9,7 @@ const UserInfoElement = () => {
   const [user, setUser] = useState(null)
   const [likeReels, setLikeReels] = useState([])
   const [saveReels,setSaveReels]=useState([])
+    const [selectedTab, setSelectedTab] = useState(null)
   useEffect(() => {
     const getUser = async () => {
       try {
@@ -25,6 +26,7 @@ const UserInfoElement = () => {
     try {
       const res=await api.get(`/api/user/like/${id}`,{withCredentials:true})
         setLikeReels(res.data.reels)
+        setSelectedTab('like')
     } catch (error) {
       console.log(error)
     }
@@ -37,12 +39,13 @@ const UserInfoElement = () => {
     const res=await api.get(`/api/user/save/${id}`,{withCredentials:true})
     console.log(res.data)
     setSaveReels(res.data.reels)
+    setSelectedTab('save')
     }
     catch(err){
       console.log(err)
     }
   }
-
+const reelToShow=selectedTab==='like'?likeReels:selectedTab==='save'?saveReels:[]
   return (
   
     <div className="relative mx-auto mt-6 p-4 rounded-2xl shadow bg-white 
@@ -77,7 +80,7 @@ const UserInfoElement = () => {
   </div>
   
       <div className="grid grid-cols-1 mt-6 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {likeReels.map((reel) => (
+        {reelToShow.map((reel) => (
           <div
             key={reel._id}
             className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden"
@@ -91,19 +94,7 @@ const UserInfoElement = () => {
           </div>
         ))}
       </div>
-       {saveReels.map((reel) => (
-          <div
-            key={reel._id}
-            className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden"
-          >
-            <video
-              src={`${reel.video}?tr=w-400,h-250,cm-extract:frame-1000`}
-              alt={reel.name}
-              className="w-full h-48 object-cover rounded-lg shadow"
-            />
-            
-          </div>
-        ))}
+      
       
 
 
