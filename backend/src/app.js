@@ -9,8 +9,21 @@ const likeRouter = require('./routes/like.route')
 const saveRouter = require('./routes/save.route')
 const app = express()
 
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  'https://ominous-space-guacamole-g47j9p9jjq653wjvg-5173.app.github.dev'
+].filter(Boolean);
+
 app.use(cors({
-  origin:'https://ominous-space-guacamole-g47j9p9jjq653wjvg-5173.app.github.dev', 
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production') {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }))
 

@@ -15,13 +15,9 @@ const AppRouter = () => {
   return (
     <Router>
         <Routes>
-         { !role &&
-               <Route path='/user/login' element={<UserLogin />} />
-          }
-          
-               <Route path='/user/login' element={<UserLogin />} ></Route>
-            <Route  path='/'  element={!role ? <Navigate to='/user/login' /> : <ReelsWatch/>}>
-             </Route>
+            <Route path='/user/login' element={<UserLogin />} />
+            <Route path='/'  element={!role ? <Navigate to='/user/login' /> : <ReelsWatch/>}>
+            </Route>
 
             {/* User */}
             <Route path='/user/register' element={<UserRegister />} />

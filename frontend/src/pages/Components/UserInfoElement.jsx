@@ -3,7 +3,7 @@ import api from '../../API/api'
 import { UserInfo } from '../../API/getInfo'
 import { GiSelfLove } from 'react-icons/gi'
 import { LuSave } from 'react-icons/lu'
-import { data } from 'react-router-dom'
+
 
 const UserInfoElement = () => {
   const [user, setUser] = useState(null)

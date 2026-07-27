@@ -10,12 +10,15 @@ const ReelsWatch = () => {
   const videoRefs = useRef([]);
 
   useEffect(() => {
-    const getFoodReels=async()=>{
-        
-        const res= await api.get(getFoodAPI,{withCredentials:true})
-    setTimeout(() => setReels(res.data.foodItems), 300);
-    }
-    getFoodReels()
+    const getFoodReels = async () => {
+      try {
+        const res = await api.get(getFoodAPI, { withCredentials: true });
+        setTimeout(() => setReels(res.data.foodItems), 300);
+      } catch (error) {
+        console.error('Failed to load food reels:', error);
+      }
+    };
+    getFoodReels();
   }, []);
 
   useEffect(() => {
